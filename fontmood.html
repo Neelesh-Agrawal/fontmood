@@ -6,24 +6,43 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 
+:root{
+  --bg:#0d0d0d;
+  --panel:#111111;
+  --muted:#a0a0a0;
+  --soft:#7f7f7f;
+  --text:#f2f2f2;
+  --line:#262626;
+  --line-strong:#3f3f3f;
+  --accent:#d9d9d9;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
 #fm-wrap{
-  background:#0d0d0d;
+  background:var(--bg);
   border-radius:16px;
   padding:0;
   overflow:hidden;
   font-family:'Inter',sans-serif;
+  border:1px solid var(--line);
+  width:100%;
+  min-height:100vh;
 }
 
 #fm-hero{
   padding:3rem 2.5rem 2rem;
-  border-bottom:0.5px solid #1f1f1f;
+  border-bottom:0.5px solid var(--line);
 }
 
 #fm-wordmark{
   font-family:'Space Mono',monospace;
   font-size:11px;
   letter-spacing:0.25em;
-  color:#444;
+  color:var(--soft);
   text-transform:uppercase;
   margin-bottom:2.5rem;
 }
@@ -32,14 +51,14 @@
   font-family:'Cormorant Garamond',serif;
   font-size:42px;
   font-weight:300;
-  color:#f0f0f0;
+  color:var(--text);
   line-height:1.15;
   margin-bottom:0.5rem;
 }
 
 #fm-sub{
   font-size:13px;
-  color:#444;
+  color:var(--muted);
   letter-spacing:0.05em;
   margin-bottom:2rem;
 }
@@ -48,13 +67,14 @@
   display:flex;
   gap:10px;
   align-items:center;
+  flex-wrap:wrap;
 }
 
 #fm-input{
-  flex:1;
+  flex:1 1 340px;
   background:#161616;
-  border:0.5px solid #2a2a2a;
-  color:#f0f0f0;
+  border:1px solid #343434;
+  color:var(--text);
   font-size:14px;
   padding:11px 16px;
   border-radius:8px;
@@ -62,14 +82,17 @@
   outline:none;
   letter-spacing:0.02em;
 }
-#fm-input::placeholder{color:#333;}
-#fm-input:focus{border-color:#3a3a3a;}
+#fm-input::placeholder{color:#8b8b8b;}
+#fm-input:focus{
+  border-color:#6a6a6a;
+  box-shadow:0 0 0 3px rgba(255,255,255,0.08);
+}
 
 #fm-btn{
   padding:11px 22px;
-  border:0.5px solid #2a2a2a;
-  background:transparent;
-  color:#888;
+  border:1px solid #4a4a4a;
+  background:#1e1e1e;
+  color:#d0d0d0;
   font-family:'Space Mono',monospace;
   font-size:11px;
   letter-spacing:0.12em;
@@ -78,7 +101,8 @@
   white-space:nowrap;
   text-transform:uppercase;
 }
-#fm-btn:hover{background:#161616;color:#f0f0f0;border-color:#3a3a3a;}
+#fm-btn:hover{background:#262626;color:#fff;border-color:#5b5b5b;}
+#fm-btn:focus-visible{outline:2px solid #bdbdbd;outline-offset:2px;}
 
 #fm-filters{
   display:flex;
@@ -89,9 +113,9 @@
 
 .filter-pill{
   padding:5px 14px;
-  border:0.5px solid #1f1f1f;
+  border:1px solid #343434;
   background:transparent;
-  color:#444;
+  color:#b7b7b7;
   font-family:'Space Mono',monospace;
   font-size:10px;
   letter-spacing:0.12em;
@@ -99,8 +123,8 @@
   cursor:pointer;
   text-transform:uppercase;
 }
-.filter-pill:hover{border-color:#3a3a3a;color:#888;}
-.filter-pill.active{background:#1a1a1a;color:#f0f0f0;border-color:#3a3a3a;}
+.filter-pill:hover{border-color:#6a6a6a;color:#f0f0f0;}
+.filter-pill.active{background:#252525;color:#f0f0f0;border-color:#6a6a6a;}
 
 #fm-grid{
   display:grid;
@@ -110,20 +134,21 @@
 
 .fcard{
   padding:2rem 1.75rem;
-  border-right:0.5px solid #161616;
-  border-bottom:0.5px solid #161616;
+  border-right:0.5px solid #1d1d1d;
+  border-bottom:0.5px solid #1d1d1d;
   cursor:pointer;
   transition:background 0.15s;
   position:relative;
 }
-.fcard:hover{background:#111;}
-.fcard.selected{background:#111;outline:1.5px solid #f0f0f0;outline-offset:-1px;z-index:1;}
+.fcard:hover{background:var(--panel);}
+.fcard.selected{background:var(--panel);outline:2px solid #cfcfcf;outline-offset:-1px;z-index:1;}
+.fcard:focus-visible{outline:2px solid #cfcfcf;outline-offset:-2px;}
 
 .fc-mood{
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.2em;
-  color:#333;
+  color:#a7a7a7;
   text-transform:uppercase;
   margin-bottom:1.25rem;
 }
@@ -131,12 +156,12 @@
 .fc-head{
   line-height:1.1;
   margin-bottom:0.75rem;
-  color:#e8e8e8;
+  color:#ededed;
 }
 
 .fc-body{
   line-height:1.65;
-  color:#3a3a3a;
+  color:#bbbbbb;
 }
 
 .fc-meta{
@@ -149,7 +174,7 @@
 .fc-pair{
   font-family:'Space Mono',monospace;
   font-size:9px;
-  color:#2a2a2a;
+  color:#9a9a9a;
   letter-spacing:0.08em;
 }
 
@@ -160,9 +185,9 @@
 
 .fc-copy-btn{
   padding:4px 10px;
-  border:0.5px solid #222;
+  border:1px solid #3e3e3e;
   background:transparent;
-  color:#444;
+  color:#b7b7b7;
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.1em;
@@ -170,12 +195,12 @@
   cursor:pointer;
   text-transform:uppercase;
 }
-.fc-copy-btn:hover{border-color:#444;color:#888;}
+.fc-copy-btn:hover{border-color:#7a7a7a;color:#f2f2f2;}
 .fc-copy-btn.done{border-color:#2a5a2a;color:#4a9a4a;}
 
 #fm-footer{
   padding:1.5rem 2.5rem;
-  border-top:0.5px solid #161616;
+  border-top:0.5px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -187,15 +212,15 @@
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.15em;
-  color:#2a2a2a;
+  color:#8b8b8b;
   text-transform:uppercase;
 }
 
 #fm-copy-all{
   padding:8px 18px;
-  border:0.5px solid #2a2a2a;
+  border:1px solid #3f3f3f;
   background:transparent;
-  color:#555;
+  color:#d0d0d0;
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.15em;
@@ -203,12 +228,12 @@
   cursor:pointer;
   text-transform:uppercase;
 }
-#fm-copy-all:hover{border-color:#444;color:#888;}
+#fm-copy-all:hover{border-color:#7a7a7a;color:#ffffff;}
 
 #fm-selected-info{
   padding:1rem 2.5rem;
   background:#0a0a0a;
-  border-top:0.5px solid #161616;
+  border-top:0.5px solid var(--line);
   display:none;
   flex-wrap:wrap;
   gap:1.5rem;
@@ -225,19 +250,19 @@
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.15em;
-  color:#2a2a2a;
+  color:#8f8f8f;
   text-transform:uppercase;
 }
 .si-val{
   font-family:'Inter',sans-serif;
   font-size:13px;
-  color:#888;
+  color:#d8d8d8;
 }
 .si-copy{
   padding:3px 10px;
-  border:0.5px solid #1f1f1f;
+  border:1px solid #3f3f3f;
   background:transparent;
-  color:#444;
+  color:#d0d0d0;
   font-family:'Space Mono',monospace;
   font-size:9px;
   letter-spacing:0.1em;
@@ -247,8 +272,24 @@
   align-self:flex-start;
   margin-top:2px;
 }
-.si-copy:hover{border-color:#333;color:#777;}
+.si-copy:hover{border-color:#808080;color:#fff;}
 .si-copy.done{color:#4a9a4a;border-color:#2a5a2a;}
+
+#fm-empty{
+  color:#b6b6b6;
+  padding:2rem 2.5rem;
+  border-top:0.5px solid var(--line);
+}
+
+@media (max-width:700px){
+  #fm-hero{padding:1.5rem 1rem;}
+  #fm-tagline{font-size:30px;}
+  #fm-sub{margin-bottom:1rem;}
+  #fm-grid{grid-template-columns:1fr;}
+  .fcard{padding:1.4rem 1rem;}
+  #fm-footer{padding:1rem;gap:10px;}
+  #fm-selected-info{padding:1rem;}
+}
 </style>
 
 <div id="fm-wrap">
@@ -272,6 +313,7 @@
   </div>
 
   <div id="fm-grid"></div>
+  <div id="fm-empty" style="display:none;">No results for this filter. Try another mood category.</div>
 
   <div id="fm-selected-info">
     <div class="si-block">
@@ -330,15 +372,20 @@ function setFilter(f, btn){
 function render(){
   const text = document.getElementById('fm-input').value.trim() || 'Design is thinking made visual';
   const grid = document.getElementById('fm-grid');
+  const empty = document.getElementById('fm-empty');
   grid.innerHTML = '';
   selectedIdx = -1;
   document.getElementById('fm-selected-info').classList.remove('show');
 
   const visible = PAIRINGS.filter(p => activeFilter==='all' || p.tags.includes(activeFilter));
+  empty.style.display = visible.length ? 'none' : 'block';
 
   visible.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'fcard';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${p.mood} pairing`);
     const figmaCSS = `font-family: '${p.head.font}';\nfont-weight: ${p.head.weight};\nfont-size: ${p.head.size}px;\n\n/* body */\nfont-family: '${p.body.font}';\nfont-weight: ${p.body.weight};\nfont-size: ${p.body.size}px;`;
 
     card.innerHTML = `
@@ -366,6 +413,12 @@ function render(){
       document.getElementById('si-css').textContent = figmaCSS;
       document.querySelectorAll('.si-copy').forEach(b=>{b.textContent='copy name';b.classList.remove('done');});
       document.querySelector('.si-copy:last-of-type') && (document.querySelectorAll('.si-copy')[2].textContent='copy css');
+    });
+    card.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.click();
+      }
     });
 
     grid.appendChild(card);
