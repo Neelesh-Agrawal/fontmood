@@ -1,0 +1,404 @@
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&family=Archivo+Black&family=DM+Serif+Display&family=Syne:wght@700&family=Fraunces:wght@300;400&family=Barlow+Condensed:wght@600;700&family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+#fm-wrap{
+  background:#0d0d0d;
+  border-radius:16px;
+  padding:0;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+}
+
+#fm-hero{
+  padding:3rem 2.5rem 2rem;
+  border-bottom:0.5px solid #1f1f1f;
+}
+
+#fm-wordmark{
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.25em;
+  color:#444;
+  text-transform:uppercase;
+  margin-bottom:2.5rem;
+}
+
+#fm-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  font-weight:300;
+  color:#f0f0f0;
+  line-height:1.15;
+  margin-bottom:0.5rem;
+}
+
+#fm-sub{
+  font-size:13px;
+  color:#444;
+  letter-spacing:0.05em;
+  margin-bottom:2rem;
+}
+
+#fm-controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+#fm-input{
+  flex:1;
+  background:#161616;
+  border:0.5px solid #2a2a2a;
+  color:#f0f0f0;
+  font-size:14px;
+  padding:11px 16px;
+  border-radius:8px;
+  font-family:'Inter',sans-serif;
+  outline:none;
+  letter-spacing:0.02em;
+}
+#fm-input::placeholder{color:#333;}
+#fm-input:focus{border-color:#3a3a3a;}
+
+#fm-btn{
+  padding:11px 22px;
+  border:0.5px solid #2a2a2a;
+  background:transparent;
+  color:#888;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.12em;
+  border-radius:8px;
+  cursor:pointer;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+#fm-btn:hover{background:#161616;color:#f0f0f0;border-color:#3a3a3a;}
+
+#fm-filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
+
+.filter-pill{
+  padding:5px 14px;
+  border:0.5px solid #1f1f1f;
+  background:transparent;
+  color:#444;
+  font-family:'Space Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  border-radius:999px;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+.filter-pill:hover{border-color:#3a3a3a;color:#888;}
+.filter-pill.active{background:#1a1a1a;color:#f0f0f0;border-color:#3a3a3a;}
+
+#fm-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:0;
+}
+
+.fcard{
+  padding:2rem 1.75rem;
+  border-right:0.5px solid #161616;
+  border-bottom:0.5px solid #161616;
+  cursor:pointer;
+  transition:background 0.15s;
+  position:relative;
+}
+.fcard:hover{background:#111;}
+.fcard.selected{background:#111;outline:1.5px solid #f0f0f0;outline-offset:-1px;z-index:1;}
+
+.fc-mood{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.2em;
+  color:#333;
+  text-transform:uppercase;
+  margin-bottom:1.25rem;
+}
+
+.fc-head{
+  line-height:1.1;
+  margin-bottom:0.75rem;
+  color:#e8e8e8;
+}
+
+.fc-body{
+  line-height:1.65;
+  color:#3a3a3a;
+}
+
+.fc-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:1.25rem;
+}
+
+.fc-pair{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  color:#2a2a2a;
+  letter-spacing:0.08em;
+}
+
+.fc-actions{
+  display:flex;
+  gap:6px;
+}
+
+.fc-copy-btn{
+  padding:4px 10px;
+  border:0.5px solid #222;
+  background:transparent;
+  color:#444;
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.1em;
+  border-radius:4px;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+.fc-copy-btn:hover{border-color:#444;color:#888;}
+.fc-copy-btn.done{border-color:#2a5a2a;color:#4a9a4a;}
+
+#fm-footer{
+  padding:1.5rem 2.5rem;
+  border-top:0.5px solid #161616;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+#fm-footer-left{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.15em;
+  color:#2a2a2a;
+  text-transform:uppercase;
+}
+
+#fm-copy-all{
+  padding:8px 18px;
+  border:0.5px solid #2a2a2a;
+  background:transparent;
+  color:#555;
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.15em;
+  border-radius:6px;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+#fm-copy-all:hover{border-color:#444;color:#888;}
+
+#fm-selected-info{
+  padding:1rem 2.5rem;
+  background:#0a0a0a;
+  border-top:0.5px solid #161616;
+  display:none;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  align-items:flex-start;
+}
+#fm-selected-info.show{display:flex;}
+
+.si-block{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.si-lbl{
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.15em;
+  color:#2a2a2a;
+  text-transform:uppercase;
+}
+.si-val{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  color:#888;
+}
+.si-copy{
+  padding:3px 10px;
+  border:0.5px solid #1f1f1f;
+  background:transparent;
+  color:#444;
+  font-family:'Space Mono',monospace;
+  font-size:9px;
+  letter-spacing:0.1em;
+  border-radius:4px;
+  cursor:pointer;
+  text-transform:uppercase;
+  align-self:flex-start;
+  margin-top:2px;
+}
+.si-copy:hover{border-color:#333;color:#777;}
+.si-copy.done{color:#4a9a4a;border-color:#2a5a2a;}
+</style>
+
+<div id="fm-wrap">
+
+  <div id="fm-hero">
+    <div id="fm-wordmark">Fontmood — day 35</div>
+    <div id="fm-tagline">Find the feeling<br>before the font.</div>
+    <div id="fm-sub">Type something. See it across 10 moods. Copy straight to Figma.</div>
+    <div id="fm-controls">
+      <input id="fm-input" placeholder="your headline here..." value="Design is thinking made visual" maxlength="48" />
+      <button id="fm-btn" onclick="render()">preview</button>
+    </div>
+    <div id="fm-filters">
+      <button class="filter-pill active" onclick="setFilter('all',this)">all</button>
+      <button class="filter-pill" onclick="setFilter('serif',this)">serif</button>
+      <button class="filter-pill" onclick="setFilter('sans',this)">sans</button>
+      <button class="filter-pill" onclick="setFilter('mono',this)">mono</button>
+      <button class="filter-pill" onclick="setFilter('editorial',this)">editorial</button>
+      <button class="filter-pill" onclick="setFilter('display',this)">display</button>
+    </div>
+  </div>
+
+  <div id="fm-grid"></div>
+
+  <div id="fm-selected-info">
+    <div class="si-block">
+      <div class="si-lbl">mood</div>
+      <div class="si-val" id="si-mood">—</div>
+    </div>
+    <div class="si-block">
+      <div class="si-lbl">heading font</div>
+      <div class="si-val" id="si-head">—</div>
+      <button class="si-copy" onclick="copyVal('si-head',this)">copy name</button>
+    </div>
+    <div class="si-block">
+      <div class="si-lbl">body font</div>
+      <div class="si-val" id="si-body">—</div>
+      <button class="si-copy" onclick="copyVal('si-body',this)">copy name</button>
+    </div>
+    <div class="si-block">
+      <div class="si-lbl">figma css</div>
+      <div class="si-val" id="si-css" style="font-family:'Space Mono',monospace;font-size:11px;color:#444;line-height:1.7;"></div>
+      <button class="si-copy" onclick="copyVal('si-css',this)">copy css</button>
+    </div>
+  </div>
+
+  <div id="fm-footer">
+    <div id="fm-footer-left">10 pairings · click to select · copy to figma</div>
+    <button id="fm-copy-all" onclick="copyAll()">copy all pairings</button>
+  </div>
+
+</div>
+
+<script>
+const PAIRINGS = [
+  { mood:'editorial cold', tags:['mono','editorial'], head:{font:'Space Mono',weight:700,size:28}, body:{font:'Inter',weight:300,size:13}, headWeight:'Bold', bodyWeight:'Light' },
+  { mood:'warm humanist',  tags:['serif','editorial'], head:{font:'Fraunces',weight:400,size:32}, body:{font:'Inter',weight:400,size:14}, headWeight:'Regular', bodyWeight:'Regular' },
+  { mood:'brutalist raw',  tags:['sans','display'], head:{font:'Archivo Black',weight:400,size:28}, body:{font:'IBM Plex Mono',weight:400,size:12}, headWeight:'Regular', bodyWeight:'Regular' },
+  { mood:'luxury serif',   tags:['serif'], head:{font:'Cormorant Garamond',weight:300,size:36}, body:{font:'Outfit',weight:300,size:14}, headWeight:'Light', bodyWeight:'Light' },
+  { mood:'sharp editorial',tags:['sans','editorial','display'], head:{font:'Syne',weight:700,size:28}, body:{font:'Inter',weight:400,size:13}, headWeight:'Bold', bodyWeight:'Regular' },
+  { mood:'monastic refined',tags:['serif','editorial'], head:{font:'Playfair Display',weight:400,size:32}, body:{font:'Inter',weight:400,size:14}, headWeight:'Regular', bodyWeight:'Regular' },
+  { mood:'sports magazine',tags:['display','sans'], head:{font:'Barlow Condensed',weight:700,size:38}, body:{font:'Inter',weight:400,size:13}, headWeight:'Bold', bodyWeight:'Regular' },
+  { mood:'dark academic',  tags:['serif','mono'], head:{font:'DM Serif Display',weight:400,size:32}, body:{font:'IBM Plex Mono',weight:400,size:12}, headWeight:'Regular', bodyWeight:'Regular' },
+  { mood:'tech minimal',   tags:['sans','display'], head:{font:'Unbounded',weight:700,size:22}, body:{font:'Inter',weight:300,size:13}, headWeight:'Bold', bodyWeight:'Light' },
+  { mood:'clean modern',   tags:['sans'], head:{font:'Outfit',weight:600,size:30}, body:{font:'Inter',weight:400,size:14}, headWeight:'SemiBold', bodyWeight:'Regular' }
+];
+
+const BODY_TEXT = 'A good typeface disappears into the work. What remains is meaning, not the mechanism.';
+let activeFilter = 'all';
+let selectedIdx = -1;
+
+function setFilter(f, btn){
+  activeFilter = f;
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function render(){
+  const text = document.getElementById('fm-input').value.trim() || 'Design is thinking made visual';
+  const grid = document.getElementById('fm-grid');
+  grid.innerHTML = '';
+  selectedIdx = -1;
+  document.getElementById('fm-selected-info').classList.remove('show');
+
+  const visible = PAIRINGS.filter(p => activeFilter==='all' || p.tags.includes(activeFilter));
+
+  visible.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'fcard';
+    const figmaCSS = `font-family: '${p.head.font}';\nfont-weight: ${p.head.weight};\nfont-size: ${p.head.size}px;\n\n/* body */\nfont-family: '${p.body.font}';\nfont-weight: ${p.body.weight};\nfont-size: ${p.body.size}px;`;
+
+    card.innerHTML = `
+      <div class="fc-mood">${p.mood}</div>
+      <div class="fc-head" style="font-family:'${p.head.font}',serif;font-weight:${p.head.weight};font-size:${p.head.size}px;">${text}</div>
+      <div class="fc-body" style="font-family:'${p.body.font}',monospace;font-weight:${p.body.weight};font-size:${p.body.size}px;">${BODY_TEXT}</div>
+      <div class="fc-meta">
+        <div class="fc-pair">${p.head.font} + ${p.body.font}</div>
+        <div class="fc-actions">
+          <button class="fc-copy-btn" onclick="copyPairing(event,${PAIRINGS.indexOf(p)},this)">copy</button>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      if(e.target.classList.contains('fc-copy-btn')) return;
+      document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedIdx = PAIRINGS.indexOf(p);
+      const info = document.getElementById('fm-selected-info');
+      info.classList.add('show');
+      document.getElementById('si-mood').textContent = p.mood;
+      document.getElementById('si-head').textContent = `${p.head.font} · ${p.headWeight} · ${p.head.size}px`;
+      document.getElementById('si-body').textContent = `${p.body.font} · ${p.bodyWeight} · ${p.body.size}px`;
+      document.getElementById('si-css').textContent = figmaCSS;
+      document.querySelectorAll('.si-copy').forEach(b=>{b.textContent='copy name';b.classList.remove('done');});
+      document.querySelector('.si-copy:last-of-type') && (document.querySelectorAll('.si-copy')[2].textContent='copy css');
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+function copyPairing(e, idx, btn){
+  e.stopPropagation();
+  const p = PAIRINGS[idx];
+  const text = `${p.mood}\nHeading: ${p.head.font} ${p.headWeight} ${p.head.size}px\nBody: ${p.body.font} ${p.bodyWeight} ${p.body.size}px`;
+  navigator.clipboard.writeText(text).catch(()=>{});
+  btn.textContent = 'copied';
+  btn.classList.add('done');
+  setTimeout(()=>{btn.textContent='copy';btn.classList.remove('done');},2000);
+}
+
+function copyVal(id, btn){
+  const val = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(val).catch(()=>{});
+  const orig = btn.textContent;
+  btn.textContent = 'copied';
+  btn.classList.add('done');
+  setTimeout(()=>{btn.textContent=orig;btn.classList.remove('done');},2000);
+}
+
+function copyAll(){
+  const all = PAIRINGS.map(p=>`${p.mood}\n  Heading: ${p.head.font} · ${p.headWeight} · ${p.head.size}px\n  Body: ${p.body.font} · ${p.bodyWeight} · ${p.body.size}px`).join('\n\n');
+  navigator.clipboard.writeText(all).catch(()=>{});
+  const btn = document.getElementById('fm-copy-all');
+  btn.textContent = 'copied all';
+  setTimeout(()=>btn.textContent='copy all pairings',2000);
+}
+
+document.getElementById('fm-input').addEventListener('keydown', e=>{if(e.key==='Enter') render();});
+render();
+</script>
